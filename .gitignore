@@ -1,0 +1,5 @@
+snake_env/
+__pycache__/
+*.pyc
+.DS_store
+.env
