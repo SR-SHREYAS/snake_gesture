@@ -19,6 +19,7 @@ class SnakeGame:
         self.window.resizable(False, False)
 
         self.score = 0
+        self.is_game_over = False # Added to track game state for OpenCV integration
         self.direction = 'down'
 
         self.label = Label(self.window, text="Score:{}".format(self.score), font=('consolas', 40))
@@ -101,12 +102,14 @@ class SnakeGame:
     def game_over(self):
         self.canvas.delete(ALL)
         self.canvas.create_text(self.canvas.winfo_width()/2, self.canvas.winfo_height()/2-45,
-                                font=('consolas', 70), text="GAME OVER", fill="red", tag="gameover")
+                                font=('consolas', 70), text="GAME OVER", fill="red", tag="gameover") 
+        self.is_game_over = True # Set game over state
 
     def restart(self):
         self.canvas.delete(ALL)
         self.snake = Snake(self.canvas)
         self.food = Food(self.canvas, self.snake)
+        self.is_game_over = False # Reset game over state
         self.score = 0
         self.direction = 'down'
         self.label.config(text="Score:{}".format(self.score))
